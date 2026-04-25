@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Автомастер | Покраска и ремонт авто</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --red:        #e63946;
+            --red-dark:   #b91c2c;
+            --red-glow:   rgba(230, 57, 70, 0.25);
+            --bg:         #0d0d0f;
+            --bg-2:       #141418;
+            --bg-3:       #1a1a20;
+            --bg-card:    #1e1e26;
+            --border:     rgba(255,255,255,0.07);
+            --text:       #f0f0f5;
+            --text-muted: #8888a0;
+            --white:      #ffffff;
+            --radius-sm:  12px;
+            --radius-md:  20px;
+            --radius-lg:  32px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 3px; }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: rgba(13, 13, 15, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            height: 68px;
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-left {
+            justify-self: end;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .header-center {
+            justify-self: center;
+        }
+
+        .header-right {
+            justify-self: start;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: var(--white);
+            text-decoration: none;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .logo-text .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--red);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .logo-text span {
+            color: var(--red);
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: color var(--transition);
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--red);
+            transition: width var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--white);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            min-height: 92vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            padding: 6rem 2rem;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://i.ibb.co/pjgDq5MD/UATAu.png') center/cover no-repeat;
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(13,13,15,0.6) 0%,
+                rgba(13,13,15,0.45) 50%,
+                rgba(13,13,15,0.9) 100%
+            );
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 780px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(230, 57, 70, 0.15);
+            border: 1px solid rgba(230, 57, 70, 0.4);
+            color: var(--red);
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-badge svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            margin-bottom: 1.2rem;
+            color: var(--white);
+        }
+
+        .hero h1 em {
+            font-style: normal;
+            color: var(--red);
+        }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            color: rgba(240,240,245,0.7);
+            max-width: 520px;
+            margin: 0 auto 2rem;
+            font-weight: 400;
+        }
+
+        .hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-tag {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: rgba(240,240,245,0.85);
+            padding: 0.35rem 0.9rem;
+            border-radius: 100px;
+            font-size: 0.82rem;
+            font-weight: 500;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--red);
+            color: var(--white);
+            padding: 0.85rem 2rem;
+            text-decoration: none;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: all var(--transition);
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            box-shadow: 0 4px 24px var(--red-glow);
+        }
+
+        .btn:hover {
+            background: var(--red-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(230, 57, 70, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid rgba(255,255,255,0.2);
+            color: var(--white);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.4);
+            box-shadow: none;
+        }
+
+        .btn svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        /* ===== STATS BAR ===== */
+        .stats-bar {
+            background: var(--bg-2);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 2rem 1.5rem;
+        }
+
+        .stats-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-num {
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: var(--red);
+            line-height: 1;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            margin-top: 0.3rem;
+            text-transform: uppercase;
+        }
+
+        /* ===== SECTIONS ===== */
+        .section {
+            padding: 5rem 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--red);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+
+        .section-label::before {
+            content: '';
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: var(--red);
+            border-radius: 2px;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 900;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 520px;
+            margin-bottom: 3rem;
+        }
+
+        /* ===== SERVICES ===== */
+        .services-section {
+            background: var(--bg-2);
+            padding: 5rem 1.5rem;
+        }
+
+        .services-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 2rem 1.8rem;
+            transition: all var(--transition);
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--red);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--transition);
+        }
+
+        .service-card:hover {
+            border-color: rgba(230, 57, 70, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 52px;
+            height: 52px;
+            background: rgba(230, 57, 70, 0.12);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+            transition: background var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            background: rgba(230, 57, 70, 0.22);
+        }
+
+        .service-icon svg {
+            width: 26px;
+            height: 26px;
+            color: var(--red);
+        }
+
+        .service-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            color: var(--white);
+        }
+
+        .service-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ===== ABOUT ===== */
+        .about-section {
+            padding: 5rem 1.5rem;
+        }
+
+        .about-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 1.1rem 1.3rem;
+            transition: border-color var(--transition);
+        }
+
+        .about-feature:hover {
+            border-color: rgba(230, 57, 70, 0.3);
+        }
+
+        .feature-icon {
+            width: 38px;
+            height: 38px;
+            background: rgba(230, 57, 70, 0.12);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .feature-icon svg {
+            width: 20px;
+            height: 20px;
+            color: var(--red);
+        }
+
+        .feature-text strong {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.2rem;
+        }
+
+        .feature-text span {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .about-visual {
+            position: relative;
+        }
+
+        .about-card-big {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .about-avatar {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--red), #ff6b6b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .about-avatar svg {
+            width: 44px;
+            height: 44px;
+            color: white;
+        }
+
+        .about-card-big h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 0.4rem;
+        }
+
+        .about-card-big .role {
+            font-size: 0.82rem;
+            color: var(--red);
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+        }
+
+        .about-card-big p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .exp-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(230, 57, 70, 0.12);
+            border: 1px solid rgba(230, 57, 70, 0.3);
+            color: var(--red);
+            padding: 0.4rem 0.9rem;
+            border-radius: 100px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            margin-top: 1.2rem;
+        }
+
+        /* ===== CONTACTS ===== */
+        .contacts-section {
+            background: var(--bg-2);
+            padding: 5rem 1.5rem;
+        }
+
+        .contacts-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+        }
+
+        .contact-card-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.9rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .contact-info-item:last-child {
+            border-bottom: none;
+        }
+
+        .contact-info-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(230, 57, 70, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-info-icon svg {
+            width: 20px;
+            height: 20px;
+            color: var(--red);
+        }
+
+        .contact-info-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 0.15rem;
+        }
+
+        .contact-info-value {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .contact-info-value a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+
+        .contact-info-value a:hover {
+            color: var(--red);
+        }
+
+        .phone-hero {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--white);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 1.5rem;
+            transition: color var(--transition);
+        }
+
+        .phone-hero:hover {
+            color: var(--red);
+        }
+
+        /* ===== SOCIAL BUTTONS ===== */
+        .social-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--bg-3);
+            border: 1px solid var(--border);
+            color: var(--white);
+            padding: 0.85rem 1.1rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: all var(--transition);
+        }
+
+        .social-btn:hover {
+            border-color: rgba(230, 57, 70, 0.4);
+            background: rgba(230, 57, 70, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .social-btn-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .social-btn-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .tg-icon   { background: #229ED9; }
+        .vb-icon   { background: #7360F2; }
+        .ig-icon   { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .tt-icon   { background: #010101; }
+
+        .social-btn-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .social-btn-name {
+            font-weight: 700;
+            font-size: 0.88rem;
+            color: var(--white);
+        }
+
+        .social-btn-sub {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .cta-block {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(230,57,70,0.15), rgba(230,57,70,0.05));
+            border: 1px solid rgba(230,57,70,0.25);
+            border-radius: var(--radius-md);
+            text-align: center;
+        }
+
+        .cta-block h3 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-block p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            padding: 2rem 1.5rem;
+            text-align: center;
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            font-size: 1rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .footer-logo span {
+            color: var(--red);
+        }
+
+        .footer-copy {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        /* ===== MODAL ===== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            max-width: 420px;
+            width: 100%;
+            transform: scale(0.95) translateY(10px);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(230, 57, 70, 0.12);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .modal-icon svg {
+            width: 30px;
+            height: 30px;
+            color: var(--red);
+        }
+
+        .modal h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-phone {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--red);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-close {
+            background: var(--bg-3);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 0.7rem 1.5rem;
+            border-radius: 100px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-family: inherit;
+            font-weight: 600;
+            transition: all var(--transition);
+        }
+
+        .modal-close:hover {
+            color: var(--white);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-up {
+            animation: fadeUp 0.7s ease both;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .about-inner {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .contacts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .header {
+                display: flex;
+                flex-direction: column;
+                height: auto;
+                padding: 0.8rem 1.2rem;
+                gap: 0.6rem;
+            }
+
+            .header-left, .header-right {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 1.2rem;
+            }
+
+            .logo-text {
+                font-size: 1.2rem;
+            }
+
+            .hero {
+                min-height: 80vh;
+                padding: 5rem 1.2rem 4rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+    <div class="header-left">
+        <a href="raboty.html" class="nav-link">Портфолио</a>
+        <a href="ceny.html" class="nav-link">Цены</a>
+    </div>
+    <div class="header-center">
+        <a href="index.html" class="logo-text">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+                    <path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1L2 11v5h2"/>
+                    <circle cx="6.5" cy="16.5" r="2.5"/>
+                    <circle cx="16.5" cy="16.5" r="2.5"/>
+                </svg>
+            </div>
+            АВТО <span>МАСТЕР</span>
+        </a>
+    </div>
+    <div class="header-right">
+        <a href="kontakty.html" class="nav-link">Контакты</a>
+        <a href="#" class="nav-link" target="_blank">Адрес</a>
+    </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-badge fade-up">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            Профессиональный автосервис
+        </div>
+        <h1 class="fade-up delay-1">Любые <em>автомалярные</em><br>работы</h1>
+        <p class="hero-sub fade-up delay-2">Восстанавливаем автомобили до заводского вида. Качество, которое видно.</p>
+        <div class="hero-tags fade-up delay-3">
+            <span class="hero-tag">Сварка</span>
+            <span class="hero-tag">Рихтовка</span>
+            <span class="hero-tag">Покраска по элементам</span>
+            <span class="hero-tag">Полный окрас</span>
+            <span class="hero-tag">PDR</span>
+        </div>
+        <div class="hero-actions fade-up delay-4">
+            <button class="btn" id="showPhoneBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z"/>
+                </svg>
+                Записаться на ремонт
+            </button>
+            <a href="#services" class="btn btn-outline">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 8v4m0 4h.01"/>
+                </svg>
+                Наши услуги
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<div class="stats-bar">
+    <div class="stats-inner">
+        <div class="stat-item">
+            <span class="stat-num">8+</span>
+            <span class="stat-label">Лет опыта</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-num">500+</span>
+            <span class="stat-label">Авто восстановлено</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-num">100%</span>
+            <span class="stat-label">Гарантия качества</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-num">1 день</span>
+            <span class="stat-label">Мелкий ремонт</span>
+        </div>
+    </div>
+</div>
+
+<!-- ===== SERVICES ===== -->
+<section id="services" class="services-section">
+    <div class="services-inner">
+        <div class="section-label">Услуги</div>
+        <h2 class="section-title">Что мы делаем?</h2>
+        <p class="section-desc">Полный спектр кузовных и малярных работ любой сложности</p>
+
+        <div class="services-grid">
+            <!-- Покраска -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2z"/>
+                        <path d="M12 2v9"/>
+                        <path d="M8 6l4-4 4 4"/>
+                        <path d="M7 11V7"/>
+                        <path d="M17 11V7"/>
+                    </svg>
+                </div>
+                <h3>Покраска</h3>
+                <p>Полная или частичная покраска автомобиля. Компьютерный подбор цвета, финишная полировка до зеркального блеска.</p>
+            </div>
+
+            <!-- Сварка -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22V12"/>
+                        <path d="m15 19-3 3-3-3"/>
+                        <path d="M8 6H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-4"/>
+                        <rect x="8" y="2" width="8" height="6" rx="1"/>
+                    </svg>
+                </div>
+                <h3>Сварка</h3>
+                <p>Восстановление порогов, арок, лонжеронов и любых кузовных элементов. Профессиональное сварочное оборудование.</p>
+            </div>
+
+            <!-- Рихтовка -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 8v4"/>
+                        <path d="M12 16h.01"/>
+                    </svg>
+                </div>
+                <h3>Рихтовка</h3>
+                <p>Правка вмятин без покраски методом PDR и классическая рихтовка. Восстанавливаем геометрию кузова.</p>
+            </div>
+
+            <!-- Мелкий ремонт -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                    </svg>
+                </div>
+                <h3>Мелкий ремонт</h3>
+                <p>Замена деталей, подготовка к покраске, антикоррозийная обработка. Устранение царапин и сколов.</p>
+            </div>
+
+            <!-- Антикор -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                </div>
+                <h3>Антикоррозийная обработка</h3>
+                <p>Защита кузова от ржавчины и внешних воздействий. Продлеваем жизнь вашего автомобиля.</p>
+            </div>
+
+            <!-- Полировка -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+                    </svg>
+                </div>
+                <h3>Полировка</h3>
+                <p>Абразивная и защитная полировка кузова. Возвращаем блеск и защищаем лакокрасочное покрытие.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about" class="about-section">
+    <div class="about-inner">
+        <div class="about-left">
+            <div class="section-label">О мастере</div>
+            <h2 class="section-title">Профессионал с опытом 8+ лет</h2>
+            <p class="section-desc" style="margin-bottom: 0;">Работал в сертифицированных дилерских центрах, сейчас — собственная мастерская с полным циклом кузовного ремонта.</p>
+
+            <div class="about-features">
+                <div class="about-feature">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </div>
+                    <div class="feature-text">
+                        <strong>Гарантия качества</strong>
+                        <span>Даём письменную гарантию на все выполненные работы</span>
+                    </div>
+                </div>
+                <div class="about-feature">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <div class="feature-text">
+                        <strong>Фирменные материалы</strong>
+                        <span>Только профессиональные краски и лаки ведущих брендов</span>
+                    </div>
+                </div>
+                <div class="about-feature">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <div class="feature-text">
+                        <strong>Соблюдение сроков</strong>
+                        <span>Работаем точно в оговорённые сроки без задержек</span>
+                    </div>
+                </div>
+                <div class="about-feature">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="1" x2="12" y2="23"/>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                    <div class="feature-text">
+                        <strong>Честные цены</strong>
+                        <span>Прозрачная смета без скрытых доплат и накруток</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-visual">
+            <div class="about-card-big">
+                <div class="about-avatar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </div>
+                <h3>Мастер Автомастер</h3>
+                <div class="role">Автомаляр · Кузовщик</div>
+                <p>Специализируюсь на полном цикле кузовного ремонта — от рихтовки до финишной полировки. Каждый автомобиль — как собственный.</p>
+                <div class="exp-badge">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    Опыт 8+ лет
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CONTACTS ===== -->
+<section id="contacts" class="contacts-section">
+    <div class="contacts-inner">
+        <div class="section-label">Контакты</div>
+        <h2 class="section-title">Свяжитесь с нами</h2>
+        <p class="section-desc">Запишитесь на бесплатную диагностику или задайте любой вопрос</p>
+
+        <div class="contacts-grid">
+            <!-- Контактная информация -->
+            <div class="contact-card">
+                <div class="contact-card-title">Информация</div>
+
+                <a href="tel:+70000000000" class="phone-hero">+7 (000) 000-00-00</a>
+
+                <div class="contact-info-item">
+                    <div class="contact-info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="contact-info-label">Адрес</div>
+                        <div class="contact-info-value">г. Ваш город, ул. Примерная, д. 1</div>
+                    </div>
+                </div>
+
+                <div class="contact-info-item">
+                    <div class="contact-info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="contact-info-label">Режим работы</div>
+                        <div class="contact-info-value">Пн–Сб: 9:00 – 20:00 · Вс по записи</div>
+                    </div>
+                </div>
+
+                <div class="contact-info-item">
+                    <div class="contact-info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="contact-info-label">Телефон</div>
+                        <div class="contact-info-value"><a href="tel:+70000000000">+7 (000) 000-00-00</a></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Соцсети + CTA -->
+            <div>
+                <div class="contact-card" style="margin-bottom: 1.2rem;">
+                    <div class="contact-card-title">Мессенджеры и соцсети</div>
+                    <div class="social-grid">
+                        <a href="#" class="social-btn" target="_blank">
+                            <div class="social-btn-icon tg-icon">
+                                <svg viewBox="0 0 24 24" fill="white">
+                                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                                </svg>
+                            </div>
+                            <div class="social-btn-text">
+                                <span class="social-btn-name">Telegram</span>
+                                <span class="social-btn-sub">Написать сейчас</span>
+                            </div>
+                        </a>
+
+                        <a href="#" class="social-btn" target="_blank">
+                            <div class="social-btn-icon vb-icon">
+                                <svg viewBox="0 0 24 24" fill="white">
+                                    <path d="M11.4 0C5.5 0 .8 4.5.8 10.1c0 3.2 1.6 6.1 4.1 8v3.8l3.6-2c1 .3 2 .4 3 .4 5.9 0 10.6-4.5 10.6-10.1S17.3 0 11.4 0zm5.5 14.5c-.2.6-.9 1.1-1.6 1.2-.4.1-.9.1-1.3 0-1.2-.3-2.3-.9-3.2-1.7-1.1-1-2-2.2-2.5-3.6-.3-.7-.4-1.4-.2-2.1.2-.6.7-1.1 1.3-1.3.2-.1.4-.1.6 0 .2.1.3.2.4.4l.9 2c.1.2.1.4 0 .6-.1.2-.3.3-.4.5-.1.1-.2.3-.1.4.4.8 1 1.5 1.8 2 .2.1.3.1.5 0 .2-.2.3-.4.5-.5.2-.1.4-.1.6 0l2 .9c.2.1.3.2.4.4.1.2 0 .5-.2.8z"/>
+                                </svg>
+                            </div>
+                            <div class="social-btn-text">
+                                <span class="social-btn-name">Viber</span>
+                                <span class="social-btn-sub">Написать сейчас</span>
+                            </div>
+                        </a>
+
+                        <a href="#" class="social-btn" target="_blank">
+                            <div class="social-btn-icon ig-icon">
+                                <svg viewBox="0 0 24 24" fill="white">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                </svg>
+                            </div>
+                            <div class="social-btn-text">
+                                <span class="social-btn-name">Instagram</span>
+                                <span class="social-btn-sub">Смотреть работы</span>
+                            </div>
+                        </a>
+
+                        <a href="#" class="social-btn" target="_blank">
+                            <div class="social-btn-icon tt-icon">
+                                <svg viewBox="0 0 24 24" fill="white">
+                                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/>
+                                </svg>
+                            </div>
+                            <div class="social-btn-text">
+                                <span class="social-btn-name">TikTok</span>
+                                <span class="social-btn-sub">Смотреть видео</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="cta-block">
+                    <h3>Готовы записаться?</h3>
+                    <p>Позвоните или напишите — ответим в течение 15 минут</p>
+                    <button class="btn" id="showPhoneBtn2">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z"/>
+                        </svg>
+                        Записаться на ремонт
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="footer-inner">
+        <a href="index.html" class="footer-logo">АВТО <span>МАСТЕР</span></a>
+        <span class="footer-copy">© 2025 · Ремонт и покраска любых автомобилей</span>
+        <span class="footer-copy">Пн–Сб 9:00 – 20:00</span>
+    </div>
+</footer>
+
+<!-- ===== MODAL ===== -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+        <div class="modal-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z"/>
+            </svg>
+        </div>
+        <h3>Записаться на ремонт</h3>
+        <p>Позвоните нам прямо сейчас — проконсультируем и запишем на удобное время</p>
+        <a href="tel:+70000000000" class="modal-phone">+7 (000) 000-00-00</a>
+        <button class="modal-close" id="modalClose">Закрыть</button>
+    </div>
+</div>
+
+<script>
+    // Modal logic
+    const overlay  = document.getElementById('modalOverlay');
+    const closeBtn = document.getElementById('modalClose');
+
+    function openModal() {
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    document.getElementById('showPhoneBtn').addEventListener('click', openModal);
+    document.getElementById('showPhoneBtn2').addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) closeModal();
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
+    });
+
+    // Scroll-triggered fade-in for sections
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.service-card, .about-feature, .contact-card, .cta-block, .stat-item').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+</script>
+
+</body>
+</html>
