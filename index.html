@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Автомастер | Покраска и ремонт авто</title>
+    <title>Ремонт квартир под ключ в Москве | СтройПрофи</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        /* ===== RESET & BASE ===== */
         *, *::before, *::after {
             margin: 0;
             padding: 0;
@@ -16,21 +15,20 @@
         }
 
         :root {
-            --red:        #e63946;
-            --red-dark:   #b91c2c;
-            --red-glow:   rgba(230, 57, 70, 0.25);
-            --bg:         #0d0d0f;
-            --bg-2:       #141418;
-            --bg-3:       #1a1a20;
-            --bg-card:    #1e1e26;
-            --border:     rgba(255,255,255,0.07);
-            --text:       #f0f0f5;
-            --text-muted: #8888a0;
-            --white:      #ffffff;
-            --radius-sm:  12px;
-            --radius-md:  20px;
-            --radius-lg:  32px;
-            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --accent: #0088CC;
+            --accent-dark: #006fa8;
+            --accent-light: #e6f4fb;
+            --dark: #0f1c2e;
+            --dark2: #1e2f42;
+            --mid: #2c3e50;
+            --text: #3a4a5c;
+            --muted: #6b7f93;
+            --bg: #f5f7fa;
+            --white: #ffffff;
+            --card-shadow: 0 4px 24px rgba(0,0,0,0.07);
+            --card-shadow-hover: 0 12px 40px rgba(0,136,204,0.15);
+            --radius: 20px;
+            --radius-sm: 12px;
         }
 
         html {
@@ -38,1401 +36,1108 @@
         }
 
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', system-ui, sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
-            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* ===== SCROLLBAR ===== */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 3px; }
-
-        /* ===== HEADER ===== */
-        .header {
-            background: rgba(13, 13, 15, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            padding: 0 2rem;
-            height: 68px;
-            position: sticky;
-            top: 0;
-            z-index: 200;
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            align-items: center;
-            gap: 1rem;
+        /* ─── UTILITIES ─── */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
         }
 
-        .header-left {
-            justify-self: end;
-            display: flex;
-            gap: 2rem;
-            align-items: center;
+        section {
+            padding: 5rem 0;
         }
 
-        .header-center {
-            justify-self: center;
-        }
-
-        .header-right {
-            justify-self: start;
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 900;
-            letter-spacing: 3px;
-            color: var(--white);
-            text-decoration: none;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .logo-text .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--red);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .logo-text span {
-            color: var(--red);
-        }
-
-        .nav-link {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            transition: color var(--transition);
-            white-space: nowrap;
-            position: relative;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--red);
-            transition: width var(--transition);
-        }
-
-        .nav-link:hover {
-            color: var(--white);
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        /* ===== HERO ===== */
-        .hero {
-            position: relative;
-            min-height: 92vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .section-title {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            color: var(--dark);
             text-align: center;
-            overflow: hidden;
-            padding: 6rem 2rem;
+            margin-bottom: 0.6rem;
         }
 
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            background: url('https://i.ibb.co/pjgDq5MD/UATAu.png') center/cover no-repeat;
-            z-index: 0;
+        .section-sub {
+            text-align: center;
+            color: var(--muted);
+            font-size: 1rem;
+            margin-bottom: 3rem;
         }
 
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                to bottom,
-                rgba(13,13,15,0.6) 0%,
-                rgba(13,13,15,0.45) 50%,
-                rgba(13,13,15,0.9) 100%
-            );
-            z-index: 1;
+        .section-line {
+            width: 48px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+            margin: 0.5rem auto 1.2rem;
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 780px;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(230, 57, 70, 0.15);
-            border: 1px solid rgba(230, 57, 70, 0.4);
-            color: var(--red);
-            padding: 0.4rem 1rem;
-            border-radius: 100px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-badge svg {
-            width: 14px;
-            height: 14px;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.2rem, 6vw, 4rem);
-            font-weight: 900;
-            line-height: 1.1;
-            letter-spacing: -1px;
-            margin-bottom: 1.2rem;
-            color: var(--white);
-        }
-
-        .hero h1 em {
-            font-style: normal;
-            color: var(--red);
-        }
-
-        .hero-sub {
-            font-size: 1.05rem;
-            color: rgba(240,240,245,0.7);
-            max-width: 520px;
-            margin: 0 auto 2rem;
-            font-weight: 400;
-        }
-
-        .hero-tags {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.6rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .hero-tag {
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.12);
-            color: rgba(240,240,245,0.85);
-            padding: 0.35rem 0.9rem;
-            border-radius: 100px;
-            font-size: 0.82rem;
-            font-weight: 500;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        /* ===== BUTTONS ===== */
         .btn {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: var(--red);
-            color: var(--white);
-            padding: 0.85rem 2rem;
+            background: linear-gradient(135deg, #0099e6, #006fa8);
+            color: #fff;
+            padding: 0.85rem 2.2rem;
+            border-radius: 50px;
             text-decoration: none;
-            border-radius: 100px;
             font-weight: 700;
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
-            transition: all var(--transition);
+            font-size: 0.95rem;
+            letter-spacing: -0.01em;
             border: none;
             cursor: pointer;
-            font-family: inherit;
-            box-shadow: 0 4px 24px var(--red-glow);
+            transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+            box-shadow: 0 4px 16px rgba(0,136,204,0.25);
         }
-
         .btn:hover {
-            background: var(--red-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(230, 57, 70, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(0,136,204,0.35);
+            background: linear-gradient(135deg, #00aaff, #0088cc);
         }
-
-        .btn:active {
-            transform: translateY(0);
-        }
-
         .btn-outline {
             background: transparent;
-            border: 1.5px solid rgba(255,255,255,0.2);
-            color: var(--white);
+            border: 2px solid rgba(255,255,255,0.6);
+            color: #fff;
             box-shadow: none;
         }
-
         .btn-outline:hover {
-            background: rgba(255,255,255,0.08);
-            border-color: rgba(255,255,255,0.4);
+            background: rgba(255,255,255,0.12);
+            border-color: #fff;
             box-shadow: none;
         }
 
-        .btn svg {
-            width: 18px;
-            height: 18px;
-            flex-shrink: 0;
+        /* ─── TOP PANEL ─── */
+        .top-panel {
+            background: var(--dark);
+            color: rgba(255,255,255,0.75);
+            padding: 0.55rem 0;
+            font-size: 0.82rem;
+            letter-spacing: 0.01em;
         }
-
-        /* ===== STATS BAR ===== */
-        .stats-bar {
-            background: var(--bg-2);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            padding: 2rem 1.5rem;
-        }
-
-        .stats-inner {
-            max-width: 900px;
-            margin: 0 auto;
+        .top-panel .container {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
+            align-items: center;
             flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+        .top-info {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .top-info span {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .top-phone a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: color 0.2s;
+        }
+        .top-phone a:hover { color: var(--accent); }
+
+        /* ─── HEADER ─── */
+        .header {
+            background: var(--white);
+            box-shadow: 0 1px 0 rgba(0,0,0,0.06), 0 4px 20px rgba(0,0,0,0.04);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             gap: 1.5rem;
         }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-num {
-            font-size: 2.4rem;
-            font-weight: 900;
-            color: var(--red);
-            line-height: 1;
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            margin-top: 0.3rem;
-            text-transform: uppercase;
-        }
-
-        /* ===== SECTIONS ===== */
-        .section {
-            padding: 5rem 1.5rem;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .section-label {
-            display: inline-flex;
+        .logo {
+            display: flex;
             align-items: center;
-            gap: 0.5rem;
-            color: var(--red);
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 0.8rem;
+            gap: 0.6rem;
+            text-decoration: none;
         }
-
-        .section-label::before {
-            content: '';
-            display: block;
-            width: 20px;
-            height: 2px;
-            background: var(--red);
-            border-radius: 2px;
-        }
-
-        .section-title {
-            font-size: clamp(1.8rem, 4vw, 2.6rem);
-            font-weight: 900;
-            line-height: 1.15;
-            letter-spacing: -0.5px;
-            margin-bottom: 1rem;
-            color: var(--white);
-        }
-
-        .section-desc {
-            color: var(--text-muted);
-            font-size: 1rem;
-            max-width: 520px;
-            margin-bottom: 3rem;
-        }
-
-        /* ===== SERVICES ===== */
-        .services-section {
-            background: var(--bg-2);
-            padding: 5rem 1.5rem;
-        }
-
-        .services-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.2rem;
-        }
-
-        .service-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            padding: 2rem 1.8rem;
-            transition: all var(--transition);
-            position: relative;
-            overflow: hidden;
-            cursor: default;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--red);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform var(--transition);
-        }
-
-        .service-card:hover {
-            border-color: rgba(230, 57, 70, 0.3);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        }
-
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .service-icon {
-            width: 52px;
-            height: 52px;
-            background: rgba(230, 57, 70, 0.12);
-            border-radius: var(--radius-sm);
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #0099e6, #006fa8);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.2rem;
-            transition: background var(--transition);
         }
-
-        .service-card:hover .service-icon {
-            background: rgba(230, 57, 70, 0.22);
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            color: var(--dark);
         }
+        .logo-text span { color: var(--accent); }
 
-        .service-icon svg {
-            width: 26px;
-            height: 26px;
-            color: var(--red);
+        .nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
         }
+        .nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+            position: relative;
+        }
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 2px;
+            transition: width 0.25s;
+        }
+        .nav a:hover { color: var(--accent); }
+        .nav a:hover::after { width: 100%; }
 
-        .service-card h3 {
-            font-size: 1.15rem;
+        .header-cta {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+        .header-phone {
             font-weight: 700;
-            margin-bottom: 0.6rem;
-            color: var(--white);
+            font-size: 1.05rem;
+            color: var(--accent);
+            text-decoration: none;
+            letter-spacing: -0.01em;
+            transition: color 0.2s;
         }
+        .header-phone:hover { color: var(--accent-dark); }
 
-        .service-card p {
-            font-size: 0.88rem;
-            color: var(--text-muted);
-            line-height: 1.6;
+        /* ─── HERO ─── */
+        .hero {
+            background: linear-gradient(135deg, #0f1c2e 0%, #1a3050 50%, #0d2240 100%);
+            color: #fff;
+            padding: 6rem 0 5rem;
+            position: relative;
+            overflow: hidden;
         }
-
-        /* ===== ABOUT ===== */
-        .about-section {
-            padding: 5rem 1.5rem;
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 70% 50%, rgba(0,136,204,0.18) 0%, transparent 65%);
+            pointer-events: none;
         }
-
-        .about-inner {
-            max-width: 1100px;
-            margin: 0 auto;
+        .hero-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
         }
-
-        .about-features {
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0,136,204,0.2);
+            border: 1px solid rgba(0,136,204,0.4);
+            color: #7dd3f8;
+            padding: 0.35rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            line-height: 1.1;
+            margin-bottom: 1.2rem;
+        }
+        .hero h1 span {
+            background: linear-gradient(90deg, #4dc8ff, #0099e6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.75);
+            max-width: 480px;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        .hero-stat {
+            text-align: center;
+            padding: 1.2rem;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-sm);
+            backdrop-filter: blur(8px);
+        }
+        .hero-stat-num {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            color: #fff;
+        }
+        .hero-stat-num span { color: #4dc8ff; }
+        .hero-stat-label {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.55);
+            margin-top: 0.2rem;
+            font-weight: 500;
+        }
+        .hero-visual {
+            position: relative;
+        }
+        .hero-card {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: var(--radius);
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+        }
+        .hero-card-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1.2rem;
+        }
+        .hero-advantages {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            margin-top: 2rem;
+            gap: 0.8rem;
         }
-
-        .about-feature {
+        .hero-adv-item {
             display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1rem;
+            background: rgba(255,255,255,0.06);
             border-radius: var(--radius-sm);
-            padding: 1.1rem 1.3rem;
-            transition: border-color var(--transition);
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.9);
         }
-
-        .about-feature:hover {
-            border-color: rgba(230, 57, 70, 0.3);
-        }
-
-        .feature-icon {
-            width: 38px;
-            height: 38px;
-            background: rgba(230, 57, 70, 0.12);
-            border-radius: 10px;
+        .hero-adv-check {
+            width: 22px;
+            height: 22px;
+            background: linear-gradient(135deg, #0099e6, #006fa8);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
         }
 
-        .feature-icon svg {
-            width: 20px;
-            height: 20px;
-            color: var(--red);
+        /* ─── SERVICES ─── */
+        .services {
+            background: var(--white);
         }
-
-        .feature-text strong {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--white);
-            margin-bottom: 0.2rem;
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
         }
-
-        .feature-text span {
-            font-size: 0.82rem;
-            color: var(--text-muted);
+        .service-card {
+            background: var(--white);
+            border: 1px solid #e8edf2;
+            border-radius: var(--radius);
+            padding: 2rem 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            cursor: default;
         }
-
-        .about-visual {
-            position: relative;
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--card-shadow-hover);
+            border-color: rgba(0,136,204,0.2);
         }
-
-        .about-card-big {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 2.5rem;
-            text-align: center;
-        }
-
-        .about-avatar {
-            width: 90px;
-            height: 90px;
-            background: linear-gradient(135deg, var(--red), #ff6b6b);
-            border-radius: 50%;
+        .service-icon-wrap {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            background: var(--accent-light);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1.5rem;
+            margin-bottom: 1.2rem;
+            transition: background 0.3s;
         }
-
-        .about-avatar svg {
-            width: 44px;
-            height: 44px;
-            color: white;
+        .service-card:hover .service-icon-wrap {
+            background: linear-gradient(135deg, #0099e6, #006fa8);
         }
-
-        .about-card-big h3 {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--white);
-            margin-bottom: 0.4rem;
+        .service-card:hover .service-icon-wrap svg path,
+        .service-card:hover .service-icon-wrap svg rect,
+        .service-card:hover .service-icon-wrap svg circle,
+        .service-card:hover .service-icon-wrap svg polyline,
+        .service-card:hover .service-icon-wrap svg line,
+        .service-card:hover .service-icon-wrap svg polygon {
+            stroke: #fff;
         }
-
-        .about-card-big .role {
-            font-size: 0.82rem;
-            color: var(--red);
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+        .service-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        .service-card p {
+            font-size: 0.88rem;
+            color: var(--muted);
+            line-height: 1.6;
             margin-bottom: 1.2rem;
         }
-
-        .about-card-big p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            line-height: 1.7;
-        }
-
-        .exp-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            background: rgba(230, 57, 70, 0.12);
-            border: 1px solid rgba(230, 57, 70, 0.3);
-            color: var(--red);
-            padding: 0.4rem 0.9rem;
-            border-radius: 100px;
-            font-size: 0.78rem;
+        .service-price {
+            display: inline-block;
+            background: var(--accent-light);
+            color: var(--accent);
             font-weight: 700;
-            margin-top: 1.2rem;
+            font-size: 0.88rem;
+            padding: 0.3rem 0.9rem;
+            border-radius: 50px;
         }
 
-        /* ===== CONTACTS ===== */
-        .contacts-section {
-            background: var(--bg-2);
-            padding: 5rem 1.5rem;
+        /* ─── WHY US ─── */
+        .why-us {
+            background: var(--bg);
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        .feature-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow-hover);
+        }
+        .feature-icon-wrap {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.2rem;
+        }
+        .feature-card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--dark);
+            margin-bottom: 0.4rem;
+        }
+        .feature-card p {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.6;
         }
 
-        .contacts-inner {
-            max-width: 1100px;
-            margin: 0 auto;
+        /* ─── PROCESS ─── */
+        .process {
+            background: var(--white);
+        }
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            position: relative;
+        }
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 28px;
+            left: calc(10% + 28px);
+            right: calc(10% + 28px);
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-light), var(--accent), var(--accent-light));
+            z-index: 0;
+        }
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .step-num {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0099e6, #006fa8);
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            box-shadow: 0 4px 16px rgba(0,136,204,0.3);
+        }
+        .process-step h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.01em;
+        }
+        .process-step p {
+            font-size: 0.8rem;
+            color: var(--muted);
+            line-height: 1.5;
         }
 
+        /* ─── CONTACTS ─── */
+        .contacts {
+            background: linear-gradient(135deg, #0f1c2e 0%, #1a3050 100%);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .contacts::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 30% 50%, rgba(0,136,204,0.15) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .contacts .section-title { color: #fff; }
+        .contacts .section-line { background: rgba(255,255,255,0.4); }
+        .contacts .section-sub { color: rgba(255,255,255,0.6); }
         .contacts-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 3rem;
+            gap: 4rem;
+            align-items: start;
         }
-
-        .contact-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            padding: 2rem;
-        }
-
-        .contact-card-title {
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--text-muted);
+        .contact-info h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
             margin-bottom: 1.5rem;
         }
-
-        .contact-info-item {
+        .contact-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .contact-item {
             display: flex;
             align-items: center;
             gap: 1rem;
-            padding: 0.9rem 0;
-            border-bottom: 1px solid var(--border);
+            padding: 1rem 1.2rem;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-sm);
+            transition: background 0.2s;
         }
-
-        .contact-info-item:last-child {
-            border-bottom: none;
-        }
-
-        .contact-info-icon {
+        .contact-item:hover { background: rgba(255,255,255,0.11); }
+        .contact-item-icon {
             width: 40px;
             height: 40px;
-            background: rgba(230, 57, 70, 0.1);
+            background: rgba(0,136,204,0.25);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
         }
-
-        .contact-info-icon svg {
-            width: 20px;
-            height: 20px;
-            color: var(--red);
+        .contact-item-text {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.85);
         }
-
-        .contact-info-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            font-weight: 500;
-            margin-bottom: 0.15rem;
-        }
-
-        .contact-info-value {
-            font-size: 0.95rem;
+        .contact-item-text a {
+            color: #fff;
+            text-decoration: none;
             font-weight: 600;
-            color: var(--white);
         }
-
-        .contact-info-value a {
-            color: var(--white);
-            text-decoration: none;
-            transition: color var(--transition);
-        }
-
-        .contact-info-value a:hover {
-            color: var(--red);
-        }
-
-        .phone-hero {
-            font-size: 1.6rem;
-            font-weight: 900;
-            color: var(--white);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 1.5rem;
-            transition: color var(--transition);
-        }
-
-        .phone-hero:hover {
-            color: var(--red);
-        }
-
-        /* ===== SOCIAL BUTTONS ===== */
-        .social-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        .contact-item-text a:hover { color: #4dc8ff; }
+        .social-row {
+            display: flex;
             gap: 0.8rem;
         }
-
         .social-btn {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            background: var(--bg-3);
-            border: 1px solid var(--border);
-            color: var(--white);
-            padding: 0.85rem 1.1rem;
-            border-radius: var(--radius-sm);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.88rem;
-            transition: all var(--transition);
-        }
-
-        .social-btn:hover {
-            border-color: rgba(230, 57, 70, 0.4);
-            background: rgba(230, 57, 70, 0.08);
-            transform: translateY(-2px);
-        }
-
-        .social-btn-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .social-btn-icon svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        .tg-icon   { background: #229ED9; }
-        .vb-icon   { background: #7360F2; }
-        .ig-icon   { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-        .tt-icon   { background: #010101; }
-
-        .social-btn-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .social-btn-name {
-            font-weight: 700;
-            font-size: 0.88rem;
-            color: var(--white);
-        }
-
-        .social-btn-sub {
-            font-size: 0.72rem;
-            color: var(--text-muted);
-            font-weight: 400;
-        }
-
-        .cta-block {
-            margin-top: 2rem;
-            padding: 2rem;
-            background: linear-gradient(135deg, rgba(230,57,70,0.15), rgba(230,57,70,0.05));
-            border: 1px solid rgba(230,57,70,0.25);
-            border-radius: var(--radius-md);
-            text-align: center;
-        }
-
-        .cta-block h3 {
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: var(--white);
-            margin-bottom: 0.5rem;
-        }
-
-        .cta-block p {
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50px;
+            color: rgba(255,255,255,0.8);
             font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 1.2rem;
-        }
-
-        /* ===== FOOTER ===== */
-        .footer {
-            background: var(--bg);
-            border-top: 1px solid var(--border);
-            padding: 2rem 1.5rem;
-            text-align: center;
-        }
-
-        .footer-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .footer-logo {
-            font-size: 1rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            color: var(--white);
+            font-weight: 600;
             text-decoration: none;
-        }
-
-        .footer-logo span {
-            color: var(--red);
-        }
-
-        .footer-copy {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-        }
-
-        /* ===== MODAL ===== */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.75);
-            backdrop-filter: blur(8px);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .modal {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 2.5rem;
-            max-width: 420px;
-            width: 100%;
-            transform: scale(0.95) translateY(10px);
-            transition: transform 0.3s;
-            text-align: center;
-        }
-
-        .modal-overlay.active .modal {
-            transform: scale(1) translateY(0);
-        }
-
-        .modal-icon {
-            width: 64px;
-            height: 64px;
-            background: rgba(230, 57, 70, 0.12);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-        }
-
-        .modal-icon svg {
-            width: 30px;
-            height: 30px;
-            color: var(--red);
-        }
-
-        .modal h3 {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--white);
-            margin-bottom: 0.5rem;
-        }
-
-        .modal p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-phone {
-            font-size: 1.6rem;
-            font-weight: 900;
-            color: var(--red);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-close {
-            background: var(--bg-3);
-            border: 1px solid var(--border);
-            color: var(--text-muted);
-            padding: 0.7rem 1.5rem;
-            border-radius: 100px;
+            transition: background 0.2s, color 0.2s;
             cursor: pointer;
-            font-size: 0.85rem;
-            font-family: inherit;
+        }
+        .social-btn:hover {
+            background: rgba(0,136,204,0.3);
+            color: #fff;
+        }
+        .contact-form-card {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            backdrop-filter: blur(12px);
+        }
+        .contact-form-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.82rem;
             font-weight: 600;
-            transition: all var(--transition);
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: var(--radius-sm);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255,255,255,0.35);
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+            background: rgba(0,136,204,0.1);
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 90px;
         }
 
-        .modal-close:hover {
-            color: var(--white);
-            border-color: rgba(255,255,255,0.2);
+        /* ─── FOOTER ─── */
+        .footer {
+            background: var(--dark);
+            color: rgba(255,255,255,0.4);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.82rem;
+        }
+        .footer p + p { margin-top: 0.4rem; }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 1024px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .process-steps { grid-template-columns: repeat(3, 1fr); }
+            .process-steps::before { display: none; }
+            .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .hero-visual { display: none; }
         }
 
-        /* ===== ANIMATIONS ===== */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(24px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-up {
-            animation: fadeUp 0.7s ease both;
-        }
-
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-        .delay-4 { animation-delay: 0.4s; }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 900px) {
-            .about-inner {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
-            }
-
-            .contacts-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 700px) {
-            .header {
-                display: flex;
-                flex-direction: column;
-                height: auto;
-                padding: 0.8rem 1.2rem;
-                gap: 0.6rem;
-            }
-
-            .header-left, .header-right {
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 1.2rem;
-            }
-
-            .logo-text {
-                font-size: 1.2rem;
-            }
-
-            .hero {
-                min-height: 80vh;
-                padding: 5rem 1.2rem 4rem;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .social-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-inner {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
+        @media (max-width: 768px) {
+            section { padding: 3rem 0; }
+            .container { padding: 0 1rem; }
+            .header .container { flex-wrap: wrap; gap: 1rem; }
+            .nav { display: none; }
+            .top-panel .container { flex-direction: column; text-align: center; gap: 0.4rem; }
+            .top-info { justify-content: center; }
+            .services-grid { grid-template-columns: 1fr; }
+            .features-grid { grid-template-columns: 1fr; }
+            .process-steps { grid-template-columns: 1fr 1fr; }
+            .contacts-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .hero-stats { grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
+            .hero-btns { flex-direction: column; }
+            .hero-btns .btn { text-align: center; justify-content: center; }
         }
 
         @media (max-width: 480px) {
-            .hero-actions {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
+            .hero-stats { grid-template-columns: 1fr; }
+            .process-steps { grid-template-columns: 1fr; }
+            .social-row { flex-wrap: wrap; }
         }
     </style>
 </head>
 <body>
 
-<!-- ===== HEADER ===== -->
-<header class="header">
-    <div class="header-left">
-        <a href="raboty.html" class="nav-link">Портфолио</a>
-        <a href="ceny.html" class="nav-link">Цены</a>
+<!-- ─── TOP PANEL ─── -->
+<div class="top-panel">
+    <div class="container">
+        <div class="top-info">
+            <span>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                г. Москва, ул. Строителей, 12
+            </span>
+            <span>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Пн–Вс: 9:00 – 21:00
+            </span>
+        </div>
+        <div class="top-phone">
+            <a href="tel:+74951234567">+7 (495) 123-45-67</a>
+        </div>
     </div>
-    <div class="header-center">
-        <a href="index.html" class="logo-text">
+</div>
+
+<!-- ─── HEADER ─── -->
+<header class="header">
+    <div class="container">
+        <a href="#" class="logo">
             <div class="logo-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
-                    <path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1L2 11v5h2"/>
-                    <circle cx="6.5" cy="16.5" r="2.5"/>
-                    <circle cx="16.5" cy="16.5" r="2.5"/>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
                 </svg>
             </div>
-            АВТО <span>МАСТЕР</span>
+            <span class="logo-text"><span>СТРОЙ</span>ПРОФИ</span>
         </a>
-    </div>
-    <div class="header-right">
-        <a href="kontakty.html" class="nav-link">Контакты</a>
-        <a href="#" class="nav-link" target="_blank">Адрес</a>
+        <nav class="nav">
+            <a href="#">Главная</a>
+            <a href="#services">Услуги</a>
+            <a href="#why">О компании</a>
+            <a href="#process">Как работаем</a>
+            <a href="#contacts">Контакты</a>
+        </nav>
+        <div class="header-cta">
+            <a href="tel:+74951234567" class="header-phone">+7 (495) 123-45-67</a>
+            <a href="#contacts" class="btn" style="padding:0.65rem 1.4rem; font-size:0.85rem;">Заказать звонок</a>
+        </div>
     </div>
 </header>
 
-<!-- ===== HERO ===== -->
+<!-- ─── HERO ─── -->
 <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-        <div class="hero-badge fade-up">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            Профессиональный автосервис
-        </div>
-        <h1 class="fade-up delay-1">Любые <em>автомалярные</em><br>работы</h1>
-        <p class="hero-sub fade-up delay-2">Восстанавливаем автомобили до заводского вида. Качество, которое видно.</p>
-        <div class="hero-tags fade-up delay-3">
-            <span class="hero-tag">Сварка</span>
-            <span class="hero-tag">Рихтовка</span>
-            <span class="hero-tag">Покраска по элементам</span>
-            <span class="hero-tag">Полный окрас</span>
-            <span class="hero-tag">PDR</span>
-        </div>
-        <div class="hero-actions fade-up delay-4">
-            <button class="btn" id="showPhoneBtn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z"/>
-                </svg>
-                Записаться на ремонт
-            </button>
-            <a href="#services" class="btn btn-outline">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"/>
-                    <path d="M12 8v4m0 4h.01"/>
-                </svg>
-                Наши услуги
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- ===== STATS ===== -->
-<div class="stats-bar">
-    <div class="stats-inner">
-        <div class="stat-item">
-            <span class="stat-num">8+</span>
-            <span class="stat-label">Лет опыта</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-num">500+</span>
-            <span class="stat-label">Авто восстановлено</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-num">100%</span>
-            <span class="stat-label">Гарантия качества</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-num">1 день</span>
-            <span class="stat-label">Мелкий ремонт</span>
-        </div>
-    </div>
-</div>
-
-<!-- ===== SERVICES ===== -->
-<section id="services" class="services-section">
-    <div class="services-inner">
-        <div class="section-label">Услуги</div>
-        <h2 class="section-title">Что мы делаем?</h2>
-        <p class="section-desc">Полный спектр кузовных и малярных работ любой сложности</p>
-
-        <div class="services-grid">
-            <!-- Покраска -->
-            <div class="service-card">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M19 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2z"/>
-                        <path d="M12 2v9"/>
-                        <path d="M8 6l4-4 4 4"/>
-                        <path d="M7 11V7"/>
-                        <path d="M17 11V7"/>
-                    </svg>
-                </div>
-                <h3>Покраска</h3>
-                <p>Полная или частичная покраска автомобиля. Компьютерный подбор цвета, финишная полировка до зеркального блеска.</p>
-            </div>
-
-            <!-- Сварка -->
-            <div class="service-card">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 22V12"/>
-                        <path d="m15 19-3 3-3-3"/>
-                        <path d="M8 6H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-4"/>
-                        <rect x="8" y="2" width="8" height="6" rx="1"/>
-                    </svg>
-                </div>
-                <h3>Сварка</h3>
-                <p>Восстановление порогов, арок, лонжеронов и любых кузовных элементов. Профессиональное сварочное оборудование.</p>
-            </div>
-
-            <!-- Рихтовка -->
-            <div class="service-card">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M12 8v4"/>
-                        <path d="M12 16h.01"/>
-                    </svg>
-                </div>
-                <h3>Рихтовка</h3>
-                <p>Правка вмятин без покраски методом PDR и классическая рихтовка. Восстанавливаем геометрию кузова.</p>
-            </div>
-
-            <!-- Мелкий ремонт -->
-            <div class="service-card">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-                    </svg>
-                </div>
-                <h3>Мелкий ремонт</h3>
-                <p>Замена деталей, подготовка к покраске, антикоррозийная обработка. Устранение царапин и сколов.</p>
-            </div>
-
-            <!-- Антикор -->
-            <div class="service-card">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    </svg>
-                </div>
-                <h3>Антикоррозийная обработка</h3>
-                <p>Защита кузова от ржавчины и внешних воздействий. Продлеваем жизнь вашего автомобиля.</p>
-            </div>
-
-            <!-- Полировка -->
-            <div class="service-card">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="3"/>
-                        <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
-                    </svg>
-                </div>
-                <h3>Полировка</h3>
-                <p>Абразивная и защитная полировка кузова. Возвращаем блеск и защищаем лакокрасочное покрытие.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== ABOUT ===== -->
-<section id="about" class="about-section">
-    <div class="about-inner">
-        <div class="about-left">
-            <div class="section-label">О мастере</div>
-            <h2 class="section-title">Профессионал с опытом 8+ лет</h2>
-            <p class="section-desc" style="margin-bottom: 0;">Работал в сертифицированных дилерских центрах, сейчас — собственная мастерская с полным циклом кузовного ремонта.</p>
-
-            <div class="about-features">
-                <div class="about-feature">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                            <polyline points="22 4 12 14.01 9 11.01"/>
-                        </svg>
-                    </div>
-                    <div class="feature-text">
-                        <strong>Гарантия качества</strong>
-                        <span>Даём письменную гарантию на все выполненные работы</span>
-                    </div>
-                </div>
-                <div class="about-feature">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                        </svg>
-                    </div>
-                    <div class="feature-text">
-                        <strong>Фирменные материалы</strong>
-                        <span>Только профессиональные краски и лаки ведущих брендов</span>
-                    </div>
-                </div>
-                <div class="about-feature">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"/>
-                            <polyline points="12 6 12 12 16 14"/>
-                        </svg>
-                    </div>
-                    <div class="feature-text">
-                        <strong>Соблюдение сроков</strong>
-                        <span>Работаем точно в оговорённые сроки без задержек</span>
-                    </div>
-                </div>
-                <div class="about-feature">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="12" y1="1" x2="12" y2="23"/>
-                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                        </svg>
-                    </div>
-                    <div class="feature-text">
-                        <strong>Честные цены</strong>
-                        <span>Прозрачная смета без скрытых доплат и накруток</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="about-visual">
-            <div class="about-card-big">
-                <div class="about-avatar">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                        <circle cx="12" cy="7" r="4"/>
-                    </svg>
-                </div>
-                <h3>Мастер Автомастер</h3>
-                <div class="role">Автомаляр · Кузовщик</div>
-                <p>Специализируюсь на полном цикле кузовного ремонта — от рихтовки до финишной полировки. Каждый автомобиль — как собственный.</p>
-                <div class="exp-badge">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                    Опыт 8+ лет
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== CONTACTS ===== -->
-<section id="contacts" class="contacts-section">
-    <div class="contacts-inner">
-        <div class="section-label">Контакты</div>
-        <h2 class="section-title">Свяжитесь с нами</h2>
-        <p class="section-desc">Запишитесь на бесплатную диагностику или задайте любой вопрос</p>
-
-        <div class="contacts-grid">
-            <!-- Контактная информация -->
-            <div class="contact-card">
-                <div class="contact-card-title">Информация</div>
-
-                <a href="tel:+70000000000" class="phone-hero">+7 (000) 000-00-00</a>
-
-                <div class="contact-info-item">
-                    <div class="contact-info-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                            <circle cx="12" cy="10" r="3"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <div class="contact-info-label">Адрес</div>
-                        <div class="contact-info-value">г. Ваш город, ул. Примерная, д. 1</div>
-                    </div>
-                </div>
-
-                <div class="contact-info-item">
-                    <div class="contact-info-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"/>
-                            <polyline points="12 6 12 12 16 14"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <div class="contact-info-label">Режим работы</div>
-                        <div class="contact-info-value">Пн–Сб: 9:00 – 20:00 · Вс по записи</div>
-                    </div>
-                </div>
-
-                <div class="contact-info-item">
-                    <div class="contact-info-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <div class="contact-info-label">Телефон</div>
-                        <div class="contact-info-value"><a href="tel:+70000000000">+7 (000) 000-00-00</a></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Соцсети + CTA -->
+    <div class="container">
+        <div class="hero-grid">
             <div>
-                <div class="contact-card" style="margin-bottom: 1.2rem;">
-                    <div class="contact-card-title">Мессенджеры и соцсети</div>
-                    <div class="social-grid">
-                        <a href="#" class="social-btn" target="_blank">
-                            <div class="social-btn-icon tg-icon">
-                                <svg viewBox="0 0 24 24" fill="white">
-                                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
-                                </svg>
-                            </div>
-                            <div class="social-btn-text">
-                                <span class="social-btn-name">Telegram</span>
-                                <span class="social-btn-sub">Написать сейчас</span>
-                            </div>
-                        </a>
-
-                        <a href="#" class="social-btn" target="_blank">
-                            <div class="social-btn-icon vb-icon">
-                                <svg viewBox="0 0 24 24" fill="white">
-                                    <path d="M11.4 0C5.5 0 .8 4.5.8 10.1c0 3.2 1.6 6.1 4.1 8v3.8l3.6-2c1 .3 2 .4 3 .4 5.9 0 10.6-4.5 10.6-10.1S17.3 0 11.4 0zm5.5 14.5c-.2.6-.9 1.1-1.6 1.2-.4.1-.9.1-1.3 0-1.2-.3-2.3-.9-3.2-1.7-1.1-1-2-2.2-2.5-3.6-.3-.7-.4-1.4-.2-2.1.2-.6.7-1.1 1.3-1.3.2-.1.4-.1.6 0 .2.1.3.2.4.4l.9 2c.1.2.1.4 0 .6-.1.2-.3.3-.4.5-.1.1-.2.3-.1.4.4.8 1 1.5 1.8 2 .2.1.3.1.5 0 .2-.2.3-.4.5-.5.2-.1.4-.1.6 0l2 .9c.2.1.3.2.4.4.1.2 0 .5-.2.8z"/>
-                                </svg>
-                            </div>
-                            <div class="social-btn-text">
-                                <span class="social-btn-name">Viber</span>
-                                <span class="social-btn-sub">Написать сейчас</span>
-                            </div>
-                        </a>
-
-                        <a href="#" class="social-btn" target="_blank">
-                            <div class="social-btn-icon ig-icon">
-                                <svg viewBox="0 0 24 24" fill="white">
-                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                                </svg>
-                            </div>
-                            <div class="social-btn-text">
-                                <span class="social-btn-name">Instagram</span>
-                                <span class="social-btn-sub">Смотреть работы</span>
-                            </div>
-                        </a>
-
-                        <a href="#" class="social-btn" target="_blank">
-                            <div class="social-btn-icon tt-icon">
-                                <svg viewBox="0 0 24 24" fill="white">
-                                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/>
-                                </svg>
-                            </div>
-                            <div class="social-btn-text">
-                                <span class="social-btn-name">TikTok</span>
-                                <span class="social-btn-sub">Смотреть видео</span>
-                            </div>
-                        </a>
+                <div class="hero-badge">
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="#4dc8ff"><circle cx="5" cy="5" r="5"/></svg>
+                    Работаем по Москве и МО
+                </div>
+                <h1>Ремонт квартир<br><span>под ключ</span><br>в Москве</h1>
+                <p>Качественная отделка, строгий контроль сроков, гарантия до 3 лет. Бесплатный выезд сметчика и дизайн-проект в подарок.</p>
+                <div class="hero-btns">
+                    <a href="#contacts" class="btn">Рассчитать стоимость</a>
+                    <a href="tel:+74951234567" class="btn btn-outline">Позвонить</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-num">500<span>+</span></div>
+                        <div class="hero-stat-label">Объектов сдано</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-num">3<span> года</span></div>
+                        <div class="hero-stat-label">Гарантия на работы</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-num">0<span> ₽</span></div>
+                        <div class="hero-stat-label">Выезд сметчика</div>
                     </div>
                 </div>
-
-                <div class="cta-block">
-                    <h3>Готовы записаться?</h3>
-                    <p>Позвоните или напишите — ответим в течение 15 минут</p>
-                    <button class="btn" id="showPhoneBtn2">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z"/>
-                        </svg>
-                        Записаться на ремонт
-                    </button>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <div class="hero-card-title">Наши преимущества</div>
+                    <div class="hero-advantages">
+                        <div class="hero-adv-item">
+                            <div class="hero-adv-check">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            Фиксированная смета — цена не меняется
+                        </div>
+                        <div class="hero-adv-item">
+                            <div class="hero-adv-check">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            Собственные бригады без посредников
+                        </div>
+                        <div class="hero-adv-item">
+                            <div class="hero-adv-check">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            Поэтапная оплата по договору
+                        </div>
+                        <div class="hero-adv-item">
+                            <div class="hero-adv-check">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            Дизайн-проект в подарок
+                        </div>
+                        <div class="hero-adv-item">
+                            <div class="hero-adv-check">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            Гарантия 3 года на все виды работ
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ===== FOOTER ===== -->
-<footer class="footer">
-    <div class="footer-inner">
-        <a href="index.html" class="footer-logo">АВТО <span>МАСТЕР</span></a>
-        <span class="footer-copy">© 2025 · Ремонт и покраска любых автомобилей</span>
-        <span class="footer-copy">Пн–Сб 9:00 – 20:00</span>
+<!-- ─── SERVICES ─── -->
+<section id="services" class="services">
+    <div class="container">
+        <h2 class="section-title">Наши услуги</h2>
+        <div class="section-line"></div>
+        <p class="section-sub">Полный спектр ремонтных работ — от косметики до дизайнерского проекта</p>
+        <div class="services-grid">
+
+            <!-- Косметический ремонт -->
+            <div class="service-card">
+                <div class="service-icon-wrap">
+                    <svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#0088CC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Кисть -->
+                        <path d="M22 4 L28 10 L14 24 Q10 28 6 26 Q4 22 8 18 Z"/>
+                        <line x1="18" y1="8" x2="24" y2="14"/>
+                        <path d="M8 18 Q6 20 6 26" stroke-width="1.4"/>
+                    </svg>
+                </div>
+                <h3>Косметический ремонт</h3>
+                <p>Обновление стен, потолка, пола. Замена обоев, покраска, укладка ламината.</p>
+                <span class="service-price">от 2 500 ₽/м²</span>
+            </div>
+
+            <!-- Капитальный ремонт -->
+            <div class="service-card">
+                <div class="service-icon-wrap">
+                    <svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#0088CC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Шестерёнка + молоток -->
+                        <circle cx="16" cy="14" r="4"/>
+                        <path d="M16 4 L16 7 M16 21 L16 24 M4 14 L7 14 M25 14 L28 14 M7.5 7.5 L9.6 9.6 M22.4 18.4 L24.5 20.5 M24.5 7.5 L22.4 9.6 M9.6 18.4 L7.5 20.5"/>
+                        <line x1="10" y1="24" x2="22" y2="24" stroke-width="2"/>
+                        <line x1="16" y1="24" x2="16" y2="28" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h3>Капитальный ремонт</h3>
+                <p>Перепланировка, стяжка, штукатурка, замена коммуникаций, электрики.</p>
+                <span class="service-price">от 5 000 ₽/м²</span>
+            </div>
+
+            <!-- Дизайнерский ремонт -->
+            <div class="service-card">
+                <div class="service-icon-wrap">
+                    <svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#0088CC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Чертёж / план -->
+                        <rect x="4" y="6" width="24" height="20" rx="2"/>
+                        <line x1="4" y1="12" x2="28" y2="12"/>
+                        <line x1="14" y1="12" x2="14" y2="26"/>
+                        <line x1="8" y1="17" x2="12" y2="17"/>
+                        <line x1="8" y1="21" x2="12" y2="21"/>
+                        <line x1="18" y1="17" x2="24" y2="17"/>
+                        <line x1="18" y1="21" x2="24" y2="21"/>
+                        <circle cx="9" cy="9" r="1" fill="#0088CC" stroke="none"/>
+                    </svg>
+                </div>
+                <h3>Дизайнерский ремонт</h3>
+                <p>Индивидуальный проект, авторский надзор, эксклюзивные материалы.</p>
+                <span class="service-price">от 8 000 ₽/м²</span>
+            </div>
+
+            <!-- Ремонт комнат -->
+            <div class="service-card">
+                <div class="service-icon-wrap">
+                    <svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#0088CC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Комната / интерьер -->
+                        <path d="M4 28 L4 8 L16 4 L28 8 L28 28"/>
+                        <line x1="4" y1="28" x2="28" y2="28"/>
+                        <!-- Диван -->
+                        <rect x="9" y="20" width="14" height="6" rx="2"/>
+                        <rect x="7" y="22" width="3" height="4" rx="1"/>
+                        <rect x="22" y="22" width="3" height="4" rx="1"/>
+                        <!-- Окно -->
+                        <rect x="13" y="10" width="6" height="6" rx="1"/>
+                        <line x1="16" y1="10" x2="16" y2="16"/>
+                        <line x1="13" y1="13" x2="19" y2="13"/>
+                    </svg>
+                </div>
+                <h3>Ремонт комнат</h3>
+                <p>Отделка спальни, гостиной, детской. Быстро и качественно.</p>
+                <span class="service-price">договорная</span>
+            </div>
+
+        </div>
     </div>
+</section>
+
+<!-- ─── WHY US ─── -->
+<section id="why" class="why-us">
+    <div class="container">
+        <h2 class="section-title">Почему выбирают нас</h2>
+        <div class="section-line"></div>
+        <p class="section-sub">Честные условия, профессиональная команда, результат который нравится</p>
+        <div class="features-grid">
+
+            <div class="feature-card">
+                <div class="feature-icon-wrap">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="#0088CC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Рулетка / замер -->
+                        <rect x="4" y="10" width="18" height="12" rx="3"/>
+                        <line x1="8" y1="14" x2="8" y2="18"/>
+                        <line x1="12" y1="13" x2="12" y2="19"/>
+                        <line x1="16" y1="14" x2="16" y2="18"/>
+                        <path d="M22 14 L28 14 L28 18 L22 18"/>
+                    </svg>
+                </div>
+                <h4>Бесплатный замер</h4>
+                <p>Выезд специалиста и составление сметы — 0 ₽</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon-wrap">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="#0088CC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Щит / гарантия -->
+                        <path d="M16 4 L28 9 L28 18 Q28 26 16 30 Q4 26 4 18 L4 9 Z"/>
+                        <polyline points="11 16 14 19 21 12"/>
+                    </svg>
+                </div>
+                <h4>Гарантия 3 года</h4>
+                <p>На все виды работ — честные обязательства</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon-wrap">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="#0088CC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Каска / мастер -->
+                        <path d="M6 18 Q6 10 16 10 Q26 10 26 18"/>
+                        <rect x="4" y="18" width="24" height="4" rx="2"/>
+                        <line x1="16" y1="10" x2="16" y2="6"/>
+                        <line x1="12" y1="7" x2="20" y2="7"/>
+                    </svg>
+                </div>
+                <h4>Штатные мастера</h4>
+                <p>Без посредников, полный контроль качества</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon-wrap">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="#0088CC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Документ / договор -->
+                        <rect x="6" y="4" width="20" height="24" rx="3"/>
+                        <line x1="10" y1="10" x2="22" y2="10"/>
+                        <line x1="10" y1="14" x2="22" y2="14"/>
+                        <line x1="10" y1="18" x2="18" y2="18"/>
+                        <polyline points="16 22 19 25 24 20" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h4>Фиксированная цена</h4>
+                <p>Сумма в договоре не меняется без вашего согласия</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ─── PROCESS ─── -->
+<section id="process" class="process">
+    <div class="container">
+        <h2 class="section-title">Как мы работаем</h2>
+        <div class="section-line"></div>
+        <p class="section-sub">Прозрачный процесс от заявки до сдачи объекта</p>
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-num">1</div>
+                <h4>Заявка</h4>
+                <p>Оставляете заявку или звоните — отвечаем в течение 15 минут</p>
+            </div>
+            <div class="process-step">
+                <div class="step-num">2</div>
+                <h4>Замер</h4>
+                <p>Бесплатный выезд специалиста, обмер помещения</p>
+            </div>
+            <div class="process-step">
+                <div class="step-num">3</div>
+                <h4>Смета</h4>
+                <p>Детальная смета с фиксированными ценами, подписание договора</p>
+            </div>
+            <div class="process-step">
+                <div class="step-num">4</div>
+                <h4>Ремонт</h4>
+                <p>Работы по графику, фотоотчёт на каждом этапе</p>
+            </div>
+            <div class="process-step">
+                <div class="step-num">5</div>
+                <h4>Сдача</h4>
+                <p>Приёмка объекта, гарантийный акт, поддержка 3 года</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── CONTACTS ─── -->
+<section id="contacts" class="contacts">
+    <div class="container">
+        <h2 class="section-title">Контакты</h2>
+        <div class="section-line"></div>
+        <p class="section-sub">Свяжитесь с нами любым удобным способом</p>
+        <div class="contacts-grid">
+            <div class="contact-info">
+                <h3>Готовы обсудить ваш проект?</h3>
+                <div class="contact-items">
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4dc8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                        </div>
+                        <div class="contact-item-text">
+                            <a href="tel:+74951234567">+7 (495) 123-45-67</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4dc8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="contact-item-text">Москва, ул. Строителей, 12</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4dc8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                        <div class="contact-item-text">
+                            <a href="mailto:info@stroiprofi.ru">info@stroiprofi.ru</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4dc8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </div>
+                        <div class="contact-item-text">Пн–Вс: 9:00 – 21:00</div>
+                    </div>
+                </div>
+                <div class="social-row">
+                    <a class="social-btn" href="#">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                        Telegram
+                    </a>
+                    <a class="social-btn" href="#">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                        WhatsApp
+                    </a>
+                    <a class="social-btn" href="#">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        Instagram
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-form-card">
+                <h3>Рассчитать стоимость</h3>
+                <form onsubmit="handleForm(event)">
+                    <div class="form-group">
+                        <label>Ваше имя</label>
+                        <input type="text" placeholder="Иван Иванов" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Телефон</label>
+                        <input type="tel" placeholder="+7 (___) ___-__-__" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Тип ремонта</label>
+                        <input type="text" placeholder="Косметический, капитальный...">
+                    </div>
+                    <div class="form-group">
+                        <label>Комментарий</label>
+                        <textarea placeholder="Площадь, пожелания, вопросы..."></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width:100%; justify-content:center;">
+                        Отправить заявку
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer class="footer">
+    <p>СТРОЙПРОФИ © 2025 | Ремонт квартир и домов в Москве</p>
+    <p>* Демо-сайт для портфолио, все данные вымышлены</p>
 </footer>
 
-<!-- ===== MODAL ===== -->
-<div class="modal-overlay" id="modalOverlay">
-    <div class="modal">
-        <div class="modal-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z"/>
-            </svg>
-        </div>
-        <h3>Записаться на ремонт</h3>
-        <p>Позвоните нам прямо сейчас — проконсультируем и запишем на удобное время</p>
-        <a href="tel:+70000000000" class="modal-phone">+7 (000) 000-00-00</a>
-        <button class="modal-close" id="modalClose">Закрыть</button>
-    </div>
-</div>
-
 <script>
-    // Modal logic
-    const overlay  = document.getElementById('modalOverlay');
-    const closeBtn = document.getElementById('modalClose');
-
-    function openModal() {
-        overlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
+    function handleForm(e) {
+        e.preventDefault();
+        const btn = e.target.querySelector('button[type="submit"]');
+        const original = btn.innerHTML;
+        btn.innerHTML = '✓ Заявка отправлена!';
+        btn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+        btn.disabled = true;
+        setTimeout(() => {
+            btn.innerHTML = original;
+            btn.style.background = '';
+            btn.disabled = false;
+            e.target.reset();
+        }, 3000);
     }
 
-    function closeModal() {
-        overlay.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-    document.getElementById('showPhoneBtn').addEventListener('click', openModal);
-    document.getElementById('showPhoneBtn2').addEventListener('click', openModal);
-    closeBtn.addEventListener('click', closeModal);
-    overlay.addEventListener('click', function(e) {
-        if (e.target === overlay) closeModal();
-    });
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeModal();
-    });
-
-    // Scroll-triggered fade-in for sections
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            const target = document.querySelector(a.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.service-card, .about-feature, .contact-card, .cta-block, .stat-item').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
     });
 </script>
-
 </body>
 </html>
